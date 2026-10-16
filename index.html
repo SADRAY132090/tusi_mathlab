@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070d1a">
+<meta name="description" content="Tusi MathLab — آزمایشگاه تعاملی ریاضیات خواجه نصیرالدین طوسی">
+<meta name="author" content="Tusi MathLab">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="Tusi MathLab — آزمایشگاه ریاضی خواجه نصیرالدین طوسی">
+<meta property="og:description" content="کشف زوج طوسی با شبیه‌سازی تعاملی، اثبات ریاضی و گالری تاریخی">
+<meta property="og:type" content="website">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="assets/images/tusi-logo.png">
+<link rel="apple-touch-icon" href="assets/images/tusi-logo.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+<title>Tusi MathLab — آزمایشگاه ریاضی خواجه نصیرالدین طوسی</title>
+</head>
+<body data-boot="pending">
+
+<!-- Background canvas -->
+<canvas id="cosmicBackground" class="cosmic-background" aria-hidden="true"></canvas>
+
+<a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="صفحه اصلی">
+    <img src="assets/images/tusi-logo.png" alt="لوگوی Tusi MathLab" width="42" height="42">
+    <span>
+      <strong>Tusi MathLab</strong>
+      <small>آزمایشگاه ریاضی خواجه نصیرالدین طوسی</small>
+    </span>
+  </a>
+  <button class="icon-button mobile-menu" id="menuToggle" aria-label="منو" aria-expanded="false">☰</button>
+  <nav id="mainNav" class="nav" aria-label="ناوبری اصلی">
+    <a href="#simulator">آزمایشگاه</a>
+    <a href="#learn">آموزش</a>
+    <a href="#gallery">گالری</a>
+    <a href="#missions">مأموریت</a>
+    <a href="#history">تاریخچه</a>
+    <a href="#sources">منابع</a>
+  </nav>
+  <div class="top-actions">
+    <button id="audioToggle" class="icon-button" aria-pressed="false" title="صدا">♪</button>
+    <button id="vrToggle" class="icon-button" aria-pressed="false" title="حالت سه‌بعدی">◈</button>
+    <button id="themeToggle" class="icon-button" aria-pressed="false" title="پوسته">◐</button>
+    <button id="cosmicToggle" class="icon-button cosmic-toggle" aria-pressed="true" title="انیمیشن فضایی">✦</button>
+    <button id="commandBtn" class="icon-button" title="پالت فرمان (Ctrl+K)">⌘</button>
+    <button id="presentationBtn" class="button button-small button-outline">حالت ارائه</button>
+  </div>
+</header>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
+
+<main id="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section id="home" class="hero section-shell">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse"></span> پروژهٔ تعاملی جشنوارهٔ ریاضی</div>
+      <h1 class="hero-title">
+        <span class="hero-line">یک ایدهٔ هندسی؛</span>
+        <span class="hero-line gradient-text">حرکتی شگفت‌انگیز</span>
+      </h1>
+      <p class="hero-lead">
+        زوج طوسی نشان می‌دهد چگونه ترکیب دو حرکت دایره‌ای می‌تواند به حرکت رفت‌وبرگشتی روی یک خط تبدیل شود. اینجا فقط تماشا نمی‌کنی؛ آزمایش می‌کنی، پیش‌بینی می‌کنی و دلیل ریاضی را کشف می‌کنی.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-shine" href="#simulator">شروع آزمایش <span>←</span></a>
+        <a class="button button-outline" href="#gallery">موزهٔ دیجیتال</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>۰۴</strong><span>ماژول تعاملی</span></div>
+        <div><strong>۰۶</strong><span>لایهٔ انیمیشن</span></div>
+        <div><strong>۱۲</strong><span>قابلیت پیشرفته</span></div>
+        <div><strong>۰۱</strong><span>میراث جاودان</span></div>
+      </div>
+    </div>
+    <div class="hero-art" role="img" aria-label="انیمیشن مدارهای کیهانی">
+      <canvas id="spaceCanvas" class="space-canvas" aria-hidden="true"></canvas>
+      <div class="space-caption"><span class="space-live-dot"></span> کاوش در هندسهٔ کیهانی</div>
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="orbit orbit-three"></div>
+      <div class="hero-center"><span class="hero-dot"></span><span class="hero-ring"></span></div>
+      <div class="art-label label-top">حرکت دایره‌ای</div>
+      <div class="art-label label-bottom">حرکت خطی</div>
+      <div class="floating-formula">x(t) = 2r cos(t)</div>
+    </div>
+  </section>
+
+  <section class="section-shell intro-strip reveal">
+    <div class="strip-icon">✦</div>
+    <div>
+      <strong>پرسش اصلی پروژه</strong>
+      <p>چطور می‌توان با ترکیب حرکت‌های دایره‌ای، نقطه‌ای را وادار کرد روی یک خط مستقیم حرکت کند؟</p>
+    </div>
+    <a href="#simulator" class="text-link">کشف پاسخ <span>←</span></a>
+  </section>
+
+  <!-- ═══ SIMULATOR ═══ -->
+  <section id="simulator" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">آزمایشگاه تعاملی</div>
+        <h2>زوج طوسی را خودت آزمایش کن</h2>
+        <p>پارامترها را تغییر بده، حرکت را مشاهده کن و مسیر نقطه را بررسی کن.</p>
+      </div>
+      <span class="section-number">01 / LAB</span>
+    </div>
+
+    <div class="lab-layout">
+      <div class="sim-card panel">
+        <div class="card-topline">
+          <div><span class="live-dot"></span><strong>نمایش زندهٔ مدل</strong></div>
+          <div class="mini-controls">
+            <button id="resetSim" class="icon-button" title="بازنشانی">↺</button>
+            <button id="recordSim" class="icon-button" title="ضبط مسیر">●</button>
+            <button id="fullscreenSim" class="icon-button" title="تمام‌صفحه">⛶</button>
+          </div>
+        </div>
+        <canvas id="simCanvas" aria-label="شبیه‌ساز هندسی زوج طوسی"></canvas>
+        <div class="sim-legend">
+          <span><i class="legend-dot dot-cyan"></i>دایرهٔ بزرگ</span>
+          <span><i class="legend-dot dot-gold"></i>دایرهٔ کوچک</span>
+          <span><i class="legend-dot dot-pink"></i>نقطهٔ متحرک</span>
+          <span><i class="legend-dot dot-purple"></i>مسیر Q</span>
+          <span><i class="legend-dot dot-green"></i>بردار سرعت</span>
+        </div>
+        <div class="sim-footer">
+          <span id="simStatus">در حال حرکت</span>
+          <span id="simFps">۶۰ FPS</span>
+        </div>
+      </div>
+
+      <aside class="controls-card panel">
+        <div class="control-head"><h3>میز کنترل</h3><span class="tag">آزمایش آزاد</span></div>
+        <div class="control-group">
+          <div class="control-label"><label for="radiusRange">شعاع مبنا <b id="radiusValue">۱۰۰</b></label><span>واحد</span></div>
+          <input id="radiusRange" type="range" min="55" max="125" value="100">
+          <div class="range-ends"><span>کوچک</span><span>بزرگ</span></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label"><label for="speedRange">سرعت <b id="speedValue">1.0×</b></label><span>ضریب</span></div>
+          <input id="speedRange" type="range" min="0.2" max="2.5" step="0.1" value="1">
+          <div class="range-ends"><span>آرام</span><span>سریع</span></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label"><label for="angleRange">زاویهٔ آغازین <b id="angleValue">۰°</b></label><span>درجه</span></div>
+          <input id="angleRange" type="range" min="0" max="360" step="5" value="0">
+          <div class="range-ends"><span>۰°</span><span>۳۶۰°</span></div>
+        </div>
+        <div class="toggle-row"><div><strong>نمایش مسیر</strong><small>رد حرکت نقطه</small></div><label class="switch"><input type="checkbox" id="traceToggle" checked><span></span></label></div>
+        <div class="toggle-row"><div><strong>شبکه</strong><small>محورهای مختصات</small></div><label class="switch"><input type="checkbox" id="gridToggle" checked><span></span></label></div>
+        <div class="toggle-row"><div><strong>بردارها</strong><small>C و Q و P</small></div><label class="switch"><input type="checkbox" id="vectorToggle" checked><span></span></label></div>
+        <div class="toggle-row"><div><strong>مسیر Q</strong><small>دایرهٔ حول مرکز</small></div><label class="switch"><input type="checkbox" id="qPathToggle" checked><span></span></label></div>
+        <div class="toggle-row"><div><strong>بردار سرعت</strong><small>v(t)</small></div><label class="switch"><input type="checkbox" id="velocityToggle" checked><span></span></label></div>
+        <div class="control-buttons">
+          <button id="playPause" class="button button-full">Ⅱ مکث</button>
+          <button id="stepFrame" class="button button-outline">گام →</button>
+        </div>
+        <button id="saveExperiment" class="button button-outline button-full">＋ ذخیرهٔ آزمایش</button>
+      </aside>
+    </div>
+
+    <div class="readouts">
+      <div class="readout"><span>زاویه</span><strong id="currentAngle">0.0°</strong><small>پارامتر</small></div>
+      <div class="readout"><span>x(t)</span><strong id="coordX">0.00</strong><small>افقی</small></div>
+      <div class="readout"><span>y(t)</span><strong id="coordY">0.00</strong><small>عمودی</small></div>
+      <div class="readout"><span>|v(t)|</span><strong id="velocityMag">0.00</strong><small>سرعت</small></div>
+    </div>
+
+    <div class="notice">
+      <span>ⓘ</span>
+      <p><strong>دربارهٔ مدل:</strong> این شبیه‌ساز یک نمایش آموزشی دوبعدی از زوج طوسی است. در حالت ایده‌آل، با انتخاب شعاع‌ها و جهت‌های چرخش سازگار، مؤلفه‌های عمودی خنثی می‌شوند و نقطه روی یک قطر رفت‌وبرگشت می‌کند.</p>
+    </div>
+
+    <div class="analysis-panel panel">
+      <div class="analysis-header">
+        <div><div class="eyebrow">تحلیل زنده</div><h3>آمار لحظه‌ای</h3></div>
+        <span class="tag tag-gold">Live</span>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-item"><span>چرخه‌ها</span><strong id="analysisCycles">۰</strong></div>
+        <div class="analysis-item"><span>بیشترین |y|</span><strong id="analysisMaxY">۰</strong></div>
+        <div class="analysis-item"><span>میانگین خطا</span><strong id="analysisAvgErr">۰</strong></div>
+        <div class="analysis-item"><span>زمان</span><strong id="analysisTime">۰s</strong></div>
+      </div>
+    </div>
+
+    <div class="saved-experiments panel">
+      <div class="inline-heading">
+        <div><h3>دفترچهٔ آزمایش‌ها</h3><p>تنظیمات ذخیره‌شده را دوباره اجرا کن.</p></div>
+        <button id="clearExperiments" class="text-link danger-link">پاک کردن</button>
+      </div>
+      <div id="experimentList" class="experiment-list"><p class="empty-state">هنوز آزمایشی ذخیره نکرده‌ای.</p></div>
+    </div>
+
+    <section class="research-panel panel">
+      <div class="inline-heading">
+        <div>
+          <div class="eyebrow">تحلیل عددی</div>
+          <h3>جدول پژوهش: زاویه و مختصات</h3>
+          <p>داده‌ها از تابع ریاضی مدل تولید می‌شوند.</p>
+        </div>
+        <button id="refreshResearch" class="button button-outline">محاسبهٔ دوباره</button>
+      </div>
+      <div class="research-table-wrap">
+        <table class="research-table">
+          <thead><tr><th>زاویه</th><th>x محاسباتی</th><th>x نظری</th><th>y محاسباتی</th><th>اختلاف x</th></tr></thead>
+          <tbody id="researchRows"></tbody>
+        </table>
+      </div>
+      <div class="research-chart-grid">
+        <div>
+          <h4>مختصات برحسب زاویه</h4>
+          <canvas id="researchChart" height="220" aria-label="نمودار"></canvas>
+          <p class="chart-note">محور افقی: زاویه؛ محور عمودی: مختصات.</p>
+        </div>
+        <div class="research-summary">
+          <h4>روش و تفسیر</h4>
+          <p>برای هر زاویه، x=R cos(t) و y=0 محاسبه می‌شوند.</p>
+          <p id="researchConclusion">برای دیدن نتیجه، محاسبه را اجرا کن.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══ LEARN ═══ -->
+  <section id="learn" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">یادگیری مرحله‌به‌مرحله</div>
+        <h2>ریاضیِ پشت حرکت</h2>
+        <p>از مشاهدهٔ شکل تا توضیحی که برای داور ارائه کنی.</p>
+      </div>
+      <span class="section-number">02 / LEARN</span>
+    </div>
+    <div class="learning-grid">
+      <article class="learn-card panel reveal-card">
+        <span class="step-badge">گام ۱</span>
+        <div class="learn-icon">◉</div>
+        <h3>حرکت دایره‌ای</h3>
+        <p>نقطه‌ای روی دایره‌ای به شعاع r حرکت می‌کند. مختصات با سینوس و کسینوس توصیف می‌شود.</p>
+        <div class="equation">x = r cos(θ)<br>y = r sin(θ)</div>
+        <button class="text-link explain-btn" data-explain="circle">توضیح بیشتر ←</button>
+      </article>
+      <article class="learn-card panel reveal-card">
+        <span class="step-badge">گام ۲</span>
+        <div class="learn-icon">◎</div>
+        <h3>ترکیب دو حرکت</h3>
+        <p>در زوج طوسی، دو حرکت دایره‌ای با نسبت شعاع و جهت چرخش مشخص ترکیب می‌شوند.</p>
+        <div class="equation">θ₂ = −θ₁</div>
+        <button class="text-link explain-btn" data-explain="combine">توضیح بیشتر ←</button>
+      </article>
+      <article class="learn-card panel reveal-card">
+        <span class="step-badge">گام ۳</span>
+        <div class="learn-icon">↔</div>
+        <h3>خنثی‌شدن مؤلفه‌ها</h3>
+        <p>مؤلفه‌های عمودی دو بردار برابر و خلاف‌جهت‌اند؛ جمع آن‌ها صفر می‌شود.</p>
+        <div class="equation">y(t) = 0</div>
+        <button class="text-link explain-btn" data-explain="cancel">توضیح بیشتر ←</button>
+      </article>
+    </div>
+
+    <div class="proof-panel panel">
+      <div class="proof-copy">
+        <div class="eyebrow">اثبات تعاملی</div>
+        <h3>اثبات را ورق بزن</h3>
+        <p>هر مرحله را بخوان و ببین چرا نتیجه به دست می‌آید.</p>
+        <div class="proof-progress"><span id="proofProgress"></span></div>
+        <small id="proofStepLabel">مرحلهٔ ۱ از ۴</small>
+        <div class="proof-visual" id="proofVisual" aria-hidden="true"></div>
+      </div>
+      <div class="proof-content">
+        <span class="proof-kicker" id="proofKicker">مدل هندسی</span>
+        <h4 id="proofTitle">مختصات نقطه را می‌نویسیم</h4>
+        <div class="proof-equation" id="proofEquation">P(θ) = (r cos θ, r sin θ)</div>
+        <p id="proofText">برای هر نقطه روی دایره، مختصات افقی و عمودی با کسینوس و سینوس زاویه مشخص می‌شود.</p>
+        <div class="proof-actions">
+          <button id="proofPrev" class="button button-outline" disabled>→ قبلی</button>
+          <button id="proofNext" class="button">بعدی ←</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="explainModal" class="modal" role="dialog" aria-modal="true" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card">
+        <button class="modal-close" data-close-modal aria-label="بستن">×</button>
+        <div class="eyebrow">توضیح تکمیلی</div>
+        <h3 id="explainTitle">توضیح</h3>
+        <p id="explainBody"></p>
+        <button class="button" data-close-modal>متوجه شدم</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section id="gallery" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">موزهٔ دیجیتال</div>
+        <h2>چهره، نسخه‌ها و میراث مکتوب</h2>
+        <p>سفری تصویری به زندگی، آثار و اندیشهٔ خواجه نصیرالدین طوسی.</p>
+      </div>
+      <span class="section-number">03 / GALLERY</span>
+    </div>
+
+    <div class="gallery-hero panel reveal-card">
+      <div class="gallery-hero-image">
+        <img src="assets/images/history/tusi-portrait.png" alt="پرترهٔ بازسازی‌شدهٔ خواجه نصیرالدین طوسی" loading="lazy">
+        <div class="gallery-hero-overlay">
+          <span class="tag tag-gold">بازسازی هنری</span>
+          <h3>خواجه نصیرالدین طوسی</h3>
+          <p>۱۲۰۱–۱۲۷۴ میلادی · ریاضیدان، منجم، فیلسوف</p>
+        </div>
+      </div>
+      <div class="gallery-hero-copy">
+        <div class="eyebrow">چهرهٔ تاریخی</div>
+        <h3>مردی که هندسه را به حرکت آورد</h3>
+        <p>خواجه نصیرالدین طوسی یکی از تأثیرگذارترین دانشمندان جهان اسلام در قرن هفتم هجری است. او در ریاضیات، نجوم، فلسفه، کلام، منطق و اخلاق آثار ماندگاری از خود به یادگار گذاشت و رصدخانهٔ مراغه را به یکی از مهم‌ترین مراکز علمی جهان تبدیل کرد.</p>
+        <div class="gallery-quote">
+          <span class="quote-mark">”</span>
+          <p>دانش، چراغی است که هرگز خاموش نمی‌شود و هر که آن را بیفروزد، راه را برای دیگران روشن می‌کند.</p>
+          <small>— برگرفته از اندیشهٔ آموزشی طوسی (بازگویی، نه نقل‌قول مستند)</small>
+        </div>
+        <p class="disclaimer-inline">⚠️ تصویر بالا بازسازی هنری معاصر است؛ از چهرهٔ تاریخی طوسی پرترهٔ مستند هم‌عصر در دست نیست.</p>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <figure class="gallery-item panel reveal-card">
+        <div class="gallery-item-image">
+          <img src="assets/images/history/manuscript-1.png" alt="نسخهٔ خطی هندسه" loading="lazy">
+          <span class="gallery-badge">نسخهٔ خطی</span>
+        </div>
+        <figcaption>
+          <h4>هندسه و اشکال</h4>
+          <p>صفحه‌ای از نسخهٔ ریاضی با ترسیم‌های هندسی و برهان قضایا.</p>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item panel reveal-card">
+        <div class="gallery-item-image">
+          <img src="assets/images/history/manuscript-2.png" alt="نسخهٔ خطی نجوم" loading="lazy">
+          <span class="gallery-badge">نجوم</span>
+        </div>
+        <figcaption>
+          <h4>زیج و جداول نجومی</h4>
+          <p>جدول‌هایی برای محاسبهٔ موقعیت اجرام آسمانی.</p>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item panel reveal-card">
+        <div class="gallery-item-image">
+          <img src="assets/images/history/manuscript-3.png" alt="نسخهٔ خطی با حاشیه" loading="lazy">
+          <span class="gallery-badge">متن و حاشیه</span>
+        </div>
+        <figcaption>
+          <h4>متن، حاشیه و تعلیق</h4>
+          <p>صفحه‌ای با متن اصلی و حاشیه‌نویسی عالمان بعدی.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="gallery-quotes">
+      <div class="quote-card panel reveal-card">
+        <span class="quote-icon">❝</span>
+        <p>هر کس در پی علم باشد، باید بداند که علم با پرسش آغاز می‌شود، نه با پاسخ.</p>
+        <small>— بازگویی آموزشی از روش علمی طوسی</small>
+      </div>
+      <div class="quote-card panel reveal-card">
+        <span class="quote-icon">❝</span>
+        <p>هندسه، زبان جهان است؛ و هر که آن را بداند، راز آفرینش را بهتر می‌فهمد.</p>
+        <small>— بازگویی آموزشی، نه نقل‌قول مستند</small>
+      </div>
+      <div class="quote-card panel reveal-card">
+        <span class="quote-icon">❝</span>
+        <p>ستارگان را بشمار، تا بدانی که تو نیز بخشی از این نظم بزرگ هستی.</p>
+        <small>— بازگویی آموزشی، نه نقل‌قول مستند</small>
+      </div>
+    </div>
+
+    <div class="gallery-links panel">
+      <h3>مشاهدهٔ نسخه‌های اصلی در کتابخانه‌های دیجیتال</h3>
+      <div class="gallery-links-list">
+        <a href="https://www.qdl.qa/en/archive/81055/vdc_100023489696.0x000060" target="_blank" rel="noopener">کتابخانهٔ دیجیتال قطر — التذکرة فی الهیئة ↗</a>
+        <a href="https://www.loc.gov/item/2021666162/" target="_blank" rel="noopener">کتابخانهٔ کنگره — مجموعهٔ رساله‌های طوسی ↗</a>
+        <a href="https://commons.wikimedia.org/wiki/File:Tusi_manus.jpg" target="_blank" rel="noopener">ویکی‌مدیا کامنز — الرسالة الاسطرلابیة ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MISSIONS ═══ -->
+  <section id="missions" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">یادگیری با آزمایش</div>
+        <h2>مأموریت‌های علمی</h2>
+        <p>اول حدس بزن؛ بعد آزمایش کن و نتیجه را تحلیل کن.</p>
+      </div>
+      <span class="section-number">04 / QUESTS</span>
+    </div>
+    <div class="mission-layout">
+      <div class="mission-card panel">
+        <div class="mission-top"><span class="tag tag-gold">مأموریت ۱</span><span id="missionStatus" class="status-pill">آمادهٔ شروع</span></div>
+        <h3>مسیر مستقیم را کشف کن</h3>
+        <p>پیش از آزمایش، پیش‌بینی خودت را انتخاب کن.</p>
+        <div class="question">کدام عامل برای حرکت خطی ضروری‌تر است؟</div>
+        <div class="answer-options" id="missionOptions">
+          <button data-answer="a">الف) فقط افزایش سرعت</button>
+          <button data-answer="b">ب) رابطهٔ درست شعاع‌ها و زاویه‌ها</button>
+          <button data-answer="c">ج) تغییر رنگ مسیر</button>
+        </div>
+        <div id="missionFeedback" class="feedback" hidden></div>
+        <div class="mission-actions">
+          <button id="checkMission" class="button">بررسی پاسخ</button>
+          <button id="resetMission" class="button button-outline">شروع دوباره</button>
+        </div>
+      </div>
+      <div class="mission-side">
+        <div class="panel challenge-stat">
+          <div class="challenge-icon">✦</div>
+          <div><span>امتیاز علمی</span><strong id="scoreValue">۰</strong><small>با حل مأموریت‌ها</small></div>
+        </div>
+        <div class="panel hypothesis-card">
+          <h3>دفترچهٔ فرضیه</h3>
+          <p>حدس خودت را بنویس.</p>
+          <textarea id="hypothesisInput" rows="4" maxlength="500" placeholder="مثلاً فکر می‌کنم اگر نسبت شعاع‌ها تغییر کند..."></textarea>
+          <button id="saveHypothesis" class="button button-full button-outline">ثبت فرضیه</button>
+          <p id="hypothesisSaved" class="small-success" hidden>فرضیه ثبت شد.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-panel panel">
+      <div class="inline-heading">
+        <div>
+          <div class="eyebrow">خودآزمایی</div>
+          <h3>آزمون کوتاه</h3>
+          <p>پاسخ هر سؤال را انتخاب کن و بازخورد بگیر.</p>
+        </div>
+        <span class="tag">۱۰ سؤال</span>
+      </div>
+      <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+      <div class="quiz-meta"><span id="quizCounter">سؤال ۱ از ۱۰</span><span id="quizScore">امتیاز: ۰</span></div>
+      <h4 id="quizQuestion">زوج طوسی چه چیزی را نشان می‌دهد؟</h4>
+      <div id="quizOptions" class="quiz-options"></div>
+      <div id="quizFeedback" class="feedback" hidden></div>
+      <div class="quiz-actions">
+        <button id="quizNext" class="button" disabled>بعدی ←</button>
+        <button id="quizRestart" class="button button-outline">شروع دوباره</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HISTORY ═══ -->
+  <section id="history" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">تاریخ علم</div>
+        <h2>از مراغه تا ریاضیات امروز</h2>
+        <p>نگاهی کوتاه به زمینهٔ تاریخی و اهمیت ایدهٔ زوج طوسی.</p>
+      </div>
+      <span class="section-number">05 / HISTORY</span>
+    </div>
+    <div class="history-layout">
+      <div class="history-feature panel reveal-card">
+        <div class="history-art">
+          <div class="history-orbit"></div>
+          <div class="history-orbit orbit-b"></div>
+          <div class="history-star">✦</div>
+          <span class="history-caption">دانش، مشاهده، استدلال</span>
+        </div>
+        <div class="history-copy">
+          <span class="tag">دانشمند ایرانی</span>
+          <h3>خواجه نصیرالدین طوسی</h3>
+          <p>نصیرالدین طوسی (۱۲۰۱–۱۲۷۴ میلادی) از دانشمندان برجستهٔ ایرانی در ریاضیات، نجوم، فلسفه و علوم دیگر بود. او در شکل‌گیری و فعالیت رصدخانهٔ مراغه نقشی مهم داشت.</p>
+          <p>زوج طوسی نامی است که در تاریخ ریاضیات برای سازوکاری هندسی به کار می‌رود: ترکیب دو حرکت دایره‌ای با نسبت‌های مشخص، حرکت رفت‌وبرگشتی روی یک خط را پدید می‌آورد.</p>
+          <div class="history-note">نکتهٔ علمی: اهمیت تاریخی یک ایده را باید با منبع معتبر بررسی کرد.</div>
+        </div>
+      </div>
+      <div class="timeline panel">
+        <h3>خط زمانی کوتاه</h3>
+        <div class="timeline-item reveal-card"><span class="timeline-dot"></span><div><time>۱۲۰۱ میلادی</time><h4>تولد طوسی</h4><p>آغاز زندگی دانشمندی اثرگذار.</p></div></div>
+        <div class="timeline-item reveal-card"><span class="timeline-dot"></span><div><time>سدهٔ سیزدهم</time><h4>رصدخانهٔ مراغه</h4><p>مراغه به مرکز پژوهش نجومی تبدیل شد.</p></div></div>
+        <div class="timeline-item reveal-card"><span class="timeline-dot"></span><div><time>۱۲۷۴ میلادی</time><h4>درگذشت طوسی</h4><p>آثار او در سنت‌های علمی بعدی بررسی شدند.</p></div></div>
+        <div class="timeline-item reveal-card"><span class="timeline-dot"></span><div><time>امروز</time><h4>یادگیری با مدل‌سازی</h4><p>مدل هندسی رابطهٔ حرکت و ریاضیات را نشان می‌دهد.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TOOLS ═══ -->
+  <section id="tools" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">ابزارهای پژوهشگر</div>
+        <h2>کارگاه تحلیل و گزارش</h2>
+        <p>داده‌های آزمایش را مرتب کن و گزارش بساز.</p>
+      </div>
+      <span class="section-number">06 / TOOLS</span>
+    </div>
+    <div class="tools-grid">
+      <div class="panel tool-card">
+        <div class="tool-icon">▤</div>
+        <h3>گزارش آزمایش</h3>
+        <p>هدف، فرضیه، روش و نتیجه را تکمیل کن.</p>
+        <label for="reportTitle">عنوان</label>
+        <input id="reportTitle" value="بررسی زوج طوسی" maxlength="120">
+        <label for="reportMethod">روش و مشاهده</label>
+        <textarea id="reportMethod" rows="3" maxlength="800" placeholder="چه تغییراتی دادی و چه دیدی؟"></textarea>
+        <label for="reportConclusion">نتیجه‌گیری</label>
+        <textarea id="reportConclusion" rows="3" maxlength="800" placeholder="نتیجه را بنویس."></textarea>
+        <button id="printReport" class="button button-full">چاپ / PDF</button>
+      </div>
+      <div class="panel tool-card">
+        <div class="tool-icon">⌘</div>
+        <h3>راهنمای ارائه</h3>
+        <p>مسیر کوتاه برای معرفی پروژه به داور.</p>
+        <ol class="presentation-list">
+          <li><strong>مسئله:</strong> چطور حرکت دایره‌ای حرکت خطی می‌سازد؟</li>
+          <li><strong>پیشینه:</strong> معرفی طوسی.</li>
+          <li><strong>آزمایش:</strong> تغییر پارامترها.</li>
+          <li><strong>ریاضیات:</strong> مختصات و خنثی‌شدن.</li>
+          <li><strong>گالری:</strong> نسخه‌های خطی.</li>
+          <li><strong>نتیجه:</strong> محدودیت‌ها.</li>
+        </ol>
+        <button id="copyPresentation" class="button button-outline button-full">کپی متن ارائه</button>
+        <p id="copyStatus" class="small-success" hidden>کپی شد.</p>
+      </div>
+      <div class="panel tool-card">
+        <div class="tool-icon">⌕</div>
+        <h3>واژه‌نامه</h3>
+        <div class="glossary">
+          <details><summary>زوج طوسی</summary><p>سازوکار هندسی که با ترکیب دو حرکت دایره‌ای، حرکت خطی می‌سازد.</p></details>
+          <details><summary>شعاع</summary><p>پاره‌خطی از مرکز دایره تا نقطه‌ای روی محیط.</p></details>
+          <details><summary>پارامتر</summary><p>مقداری که در مدل تغییر می‌دهیم.</p></details>
+          <details><summary>فرضیه</summary><p>پیش‌بینی قابل‌آزمایش پیش از آزمایش.</p></details>
+          <details><summary>مدل ریاضی</summary><p>نمایش ساده‌شدهٔ یک پدیده با رابطه‌ها.</p></details>
+          <details><summary>زیج</summary><p>جدول نجومی برای محاسبهٔ موقعیت اجرام.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SOURCES ═══ -->
+  <section id="sources" class="section-shell section-block">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">شفافیت علمی</div>
+        <h2>منابع و روش کار</h2>
+        <p>ادعاها باید قابل بررسی باشند.</p>
+      </div>
+      <span class="section-number">07 / SOURCES</span>
+    </div>
+    <div class="sources-grid">
+      <article class="panel source-card reveal-card"><span class="source-number">01</span><h3>Encyclopaedia Britannica</h3><p>اطلاعات عمومی دربارهٔ طوسی.</p><a href="https://www.britannica.com/biography/Nasir-al-Din-al-Tusi" target="_blank" rel="noopener">مطالعه ↗</a></article>
+      <article class="panel source-card reveal-card"><span class="source-number">02</span><h3>MacTutor</h3><p>تاریخ ریاضیات و ریاضی‌دانان.</p><a href="https://mathshistory.st-andrews.ac.uk/" target="_blank" rel="noopener">پایگاه ↗</a></article>
+      <article class="panel source-card reveal-card"><span class="source-number">03</span><h3>کتابخانهٔ قطر</h3><p>نسخه‌های تاریخی مرتبط با طوسی.</p><a href="https://www.qdl.qa/" target="_blank" rel="noopener">مشاهده ↗</a></article>
+      <article class="panel source-card reveal-card"><span class="source-number">04</span><h3>مدل پروژه</h3><p>شبیه‌ساز یک مدل آموزشی ایده‌آل است.</p><a href="#learn">اثبات ریاضی ↑</a></article>
+    </div>
+    <div class="disclaimer panel">
+      <strong>یادداشت پژوهشی</strong>
+      <p>این سایت یک پروژهٔ آموزشی است، نه مقالهٔ تخصصی. پیش از ارائه، منابع را بررسی کن.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <img src="assets/images/tusi-logo.png" alt="" width="32" height="32">
+    <strong>Tusi MathLab</strong>
+  </div>
+  <p>یادگیری ریاضی با پرسش، آزمایش و استدلال — به یاد خواجه نصیرالدین طوسی.</p>
+  <div class="footer-bottom">
+    <span>پروژهٔ آموزشی جشنوارهٔ ریاضی</span>
+    <button id="backToTop" class="text-link">بازگشت به بالا ↑</button>
+  </div>
+</footer>
+
+<div id="commandPalette" class="command-palette" hidden>
+  <div class="command-backdrop" data-close-command></div>
+  <div class="command-box" role="dialog" aria-modal="true" aria-label="پالت فرمان">
+    <div class="command-input-wrap">
+      <span class="command-icon">⌘</span>
+      <input id="commandInput" type="text" placeholder="جستجوی فرمان…" autocomplete="off">
+      <kbd class="command-hint">Esc</kbd>
+    </div>
+    <ul id="commandList" class="command-list" role="listbox"></ul>
+  </div>
+</div>
+
+<div id="lightbox" class="lightbox" hidden>
+  <div class="lightbox-backdrop" data-close-lightbox></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" data-close-lightbox aria-label="بستن">×</button>
+    <img src="" alt="">
+    <p class="lightbox-caption"></p>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/tusi-math.js"></script>
+<script src="js/space-animation.js"></script>
+<script src="js/cosmic-background.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/audio-engine.js"></script>
+<script src="js/vr-mode.js"></script>
+<script src="js/commander.js"></script>
+<script src="script.js"></script>
+<script>
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

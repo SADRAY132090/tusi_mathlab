@@ -1,0 +1,20 @@
+/* Additional responsive rules */
+@media (min-width: 1400px) {
+  :root { --max: 1320px; }
+  .sim-card canvas { height: min(46vh, 500px); }
+  .section-block { padding-top: 110px; }
+}
+@media (max-width: 500px) {
+  .hero-stats { flex-wrap: wrap; }
+  .hero-stats div { min-width: 70px; }
+  .card-topline { align-items: flex-start; }
+  .sim-card canvas { height: 240px; }
+  .research-table th, .research-table td { padding: 7px 8px; font-size: 11px; }
+  .proof-equation { font-size: 18px; }
+  .mission-actions, .proof-actions { flex-wrap: wrap; }
+  .mission-actions .button, .proof-actions .button { flex: 1; }
+}
+@media (forced-colors: active) {
+  .panel, .button, .icon-button { border: 1px solid CanvasText; }
+  .gradient-text { background: none; color: CanvasText; }
+}

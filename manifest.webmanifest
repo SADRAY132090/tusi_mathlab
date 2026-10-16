@@ -1,0 +1,17 @@
+{
+  "name": "Tusi MathLab — آزمایشگاه ریاضی خواجه نصیرالدین طوسی",
+  "short_name": "Tusi MathLab",
+  "description": "آزمایشگاه تعاملی ریاضیات خواجه نصیرالدین طوسی",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070d1a",
+  "theme_color": "#070d1a",
+  "lang": "fa",
+  "dir": "rtl",
+ 
+  "icons": [
+    { "src": "assets/images/tusi-logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/images/tusi-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
